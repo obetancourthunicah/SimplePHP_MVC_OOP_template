@@ -267,7 +267,7 @@ class Renderer
                     $currentContext = trim(
                         str_replace("}}", "", str_replace("{{ifnot", "", $node))
                     );
-                    $ifNotCondition = false;
+                    $ifNotCondition = true;
                     if (strpos($currentContext, "~") !== false) {
                         $tmpCurrentContext = str_replace("~", "", $currentContext);
                         if (isset($root[$tmpCurrentContext])) {
