@@ -1,0 +1,31 @@
+{
+  "public": [
+    {
+      "id": "Menu_SignIn",
+      "nav_url": "index.php?page=Sec_Login",
+      "nav_label":"<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Iniciar Sesión"
+    },
+     {
+      "id": "Menu_SignUp",
+      "nav_url": "index.php?page=Sec_Register",
+      "nav_label":"<i class=\"fas fa-sign-in-alt\"></i>&nbsp;Crear Cuenta"
+    }
+  ],
+  "private": [
+    {
+      "id":"Menu_MntUsuarios",
+      "nav_url": "index.php?page=Mnt_Usuarios",
+      "nav_label": "Usuarios"
+    },
+    {
+      "id":"Menu_MntQuotes",
+      "nav_url": "index.php?page=Mnt_Quotes",
+      "nav_label": "Citas"
+    },
+    {
+      "id":"Menu_PaymentCheckout",
+      "nav_url": "index.php?page=Checkout_Checkout",
+      "nav_label": "Carretilla de Compra"
+    }
+  ]
+}
