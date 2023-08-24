@@ -27,3 +27,23 @@
 .WWList table tbody tr:nth-child(2n) {
   background-color: @secondary_bg300;
 }
+
+.WWList table thead th a, .WWList table thead th a:visited  {
+  text-decoration: none;
+  color: @primary_text;
+}
+.WWList table thead th a::after{
+  content: " ▼";
+  font-size: 0.8em;
+  color: @primary_text;
+}
+
+.WWList table tbody td a, .WWList table tbody td a:visited  {
+  text-decoration: none;
+  color: @primary_text;
+}
+.WWList table thead th a::after{
+  content: " ▼";
+  font-size: 0.8em;
+  color: @primary_text;
+}
