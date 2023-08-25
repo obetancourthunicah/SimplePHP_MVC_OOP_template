@@ -14,7 +14,7 @@ class  Products extends Table
     int $page = 0,
     int $itemsPerPage = 10
   ) {
-    $sqlstr = "SELECT p.productId, p.productName, p.productDescription, p.productPrice, p.productImgUrl, p.productStatus 
+    $sqlstr = "SELECT p.productId, p.productName, p.productDescription, p.productPrice, p.productImgUrl, p.productStatus, case when p.productStatus = 'ACT' then 'Activo' when p.productStatus = 'INA' then 'Inactivo' else 'Sin Asignar' end as productStatusDsc 
     FROM products p";
     $sqlstrCount = "SELECT COUNT(*) as count FROM products p";
     $conditions = [];
@@ -43,8 +43,13 @@ class  Products extends Table
         $sqlstr .= " DESC";
       }
     }
-    $sqlstr .= " LIMIT " . $page * $itemsPerPage . ", " . $itemsPerPage;
     $numeroDeRegistros = self::obtenerUnRegistro($sqlstrCount, $params)["count"];
+    $pagesCount = ceil($numeroDeRegistros / $itemsPerPage);
+    if ($page > $pagesCount - 1) {
+      $page = $pagesCount - 1;
+    }
+    $sqlstr .= " LIMIT " . $page * $itemsPerPage . ", " . $itemsPerPage;
+
     $registros = self::obtenerRegistros($sqlstr, $params);
     return ["products" => $registros, "total" => $numeroDeRegistros, "page" => $page, "itemsPerPage" => $itemsPerPage];
   }

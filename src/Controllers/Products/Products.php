@@ -4,6 +4,7 @@ namespace Controllers\Products;
 
 use Controllers\PublicController;
 use Utilities\Context;
+use Utilities\Paging;
 use Dao\Products\Products as DaoProducts;
 use Views\Renderer;
 
@@ -24,7 +25,6 @@ class Products extends PublicController
   {
     $this->getParamsFromContext();
     $this->getParams();
-    $this->setParamsToContext();
     $tmpProducts = DaoProducts::getProducts(
       $this->partialName,
       $this->status,
@@ -36,15 +36,21 @@ class Products extends PublicController
     $this->products = $tmpProducts["products"];
     $this->productsCount = $tmpProducts["total"];
     $this->pages = $this->productsCount > 0 ? ceil($this->productsCount / $this->itemsPerPage) : 1;
+    if ($this->pageNumber > $this->pages) {
+      $this->pageNumber = $this->pages;
+    }
+    $this->setParamsToContext();
     $this->setParamsToDataView();
-    //die(json_encode($this->viewData));
     Renderer::render("products/products", $this->viewData);
   }
 
   private function getParams(): void
   {
     $this->partialName = isset($_GET["partialName"]) ? $_GET["partialName"] : $this->partialName;
-    $this->status = isset($_GET["status"]) && in_array($_GET["status"], ['ACT', 'INA']) ? $_GET["status"] : $this->status;
+    $this->status = isset($_GET["status"]) && in_array($_GET["status"], ['ACT', 'INA', 'EMP']) ? $_GET["status"] : $this->status;
+    if ($this->status === "EMP") {
+      $this->status = "";
+    }
     $this->orderBy = isset($_GET["orderBy"]) && in_array($_GET["orderBy"], ["productId", "productName", "productPrice", "clear"]) ? $_GET["orderBy"] : $this->orderBy;
     if ($this->orderBy === "clear") {
       $this->orderBy = "";
@@ -93,5 +99,15 @@ class Products extends PublicController
       }
       $this->viewData[$orderByKey] = true;
     }
+    $statusKey = "status_" . ($this->status === "" ? "EMP" : $this->status);
+    $this->viewData[$statusKey] = "selected";
+    $pagination = Paging::getPagination(
+      $this->productsCount,
+      $this->itemsPerPage,
+      $this->pageNumber,
+      "index.php?page=Products_Products",
+      "Products_Products"
+    );
+    $this->viewData["pagination"] = $pagination;
   }
 }
