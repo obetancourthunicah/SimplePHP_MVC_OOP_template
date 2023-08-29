@@ -66,16 +66,16 @@
       {{foreach products}}
       <tr>
         <td>{{productId}}</td>
-        <td> <a class="link" href="index.php?page=Products-Product&mode=DSP&id={{productId}}">{{productDescription}}</a>
+        <td> <a class="link" href="index.php?page=Products-Product&mode=DSP&productId={{productId}}">{{productDescription}}</a>
         </td>
         <td class="right">
           {{productPrice}}
         </td>
         <td class="center">{{productStatusDsc}}</td>
         <td class="center">
-          <a href="index.php?page=Products-Product&mode=UPD&id={{productId}}">Editar</a>
+          <a href="index.php?page=Products-Product&mode=UPD&productId={{productId}}">Editar</a>
           &nbsp;
-          <a href="index.php?page=Products-Product&mode=DEL&id={{productId}}">Eliminar</a>
+          <a href="index.php?page=Products-Product&mode=DEL&productId={{productId}}">Eliminar</a>
         </td>
       </tr>
       {{endfor products}}
