@@ -13,16 +13,6 @@
   ],
   "private": [
     {
-      "id":"Menu_MntUsuarios",
-      "nav_url": "index.php?page=Mnt_Usuarios",
-      "nav_label": "Usuarios"
-    },
-    {
-      "id":"Menu_MntQuotes",
-      "nav_url": "index.php?page=Mnt_Quotes",
-      "nav_label": "Citas"
-    },
-    {
       "id":"Menu_PaymentCheckout",
       "nav_url": "index.php?page=Checkout_Checkout",
       "nav_label": "Carretilla de Compra"
