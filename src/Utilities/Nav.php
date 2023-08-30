@@ -17,6 +17,7 @@ class Nav
     {
         $tmpNAVIGATION = Context::getContextByKey("NAVIGATION");
         if ($tmpNAVIGATION === "") {
+            $tmpNAVIGATION = [];
             $userID = Security::getUserId();
             $navigationData = self::getNavFromJson()["private"];
             foreach ($navigationData as $navEntry) {
