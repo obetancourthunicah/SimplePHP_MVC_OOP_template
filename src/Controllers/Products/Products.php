@@ -2,13 +2,13 @@
 
 namespace Controllers\Products;
 
-use Controllers\PublicController;
+use Controllers\PrivateController;
 use Utilities\Context;
 use Utilities\Paging;
 use Dao\Products\Products as DaoProducts;
 use Views\Renderer;
 
-class Products extends PublicController
+class Products extends PrivateController
 {
   private $partialName = "";
   private $status = "";

@@ -2,13 +2,13 @@
 
 namespace Controllers\Products;
 
-use Controllers\PublicController;
+use Controllers\PrivateController;
 use Views\Renderer;
 use Dao\Products\Products as ProductsDao;
 use Utilities\Site;
 use Utilities\Validators;
 
-class Product extends PublicController
+class Product extends PrivateController
 {
   private $viewData = [];
   private $mode = "DSP";
