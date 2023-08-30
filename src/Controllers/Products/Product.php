@@ -53,6 +53,9 @@ class Product extends PrivateController
   {
     $this->mode = $_GET["mode"] ?? "NOF";
     if (isset($this->modeDescriptions[$this->mode])) {
+      if (!$this->isFeatureAutorized("product_" . $this->mode)) {
+        throw new \Exception("No tiene permisos para realizar esta acción.", 1);
+      }
       $this->readonly = $this->mode === "DEL" ? "readonly" : "";
       $this->showCommitBtn = $this->mode !== "DSP";
       if ($this->mode !== "INS") {
