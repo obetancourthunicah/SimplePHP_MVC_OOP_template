@@ -59,23 +59,37 @@
           {{endif OrderProductPrice}}
         </th>
         <th>Estado</th>
-        <th><a href="index.php?page=Products-Product&mode=INS">Nuevo</a></th>
+        <th>
+          {{if product_INS}}
+            <a href="index.php?page=Products-Product&mode=INS">Nuevo</a>
+          {{endif product_INS}}
+        </th>
       </tr>
     </thead>
     <tbody>
       {{foreach products}}
       <tr>
         <td>{{productId}}</td>
-        <td> <a class="link" href="index.php?page=Products-Product&mode=DSP&productId={{productId}}">{{productDescription}}</a>
+        <td>
+          {{if ~product_DSP}}
+              <a class="link" href="index.php?page=Products-Product&mode=DSP&productId={{productId}}">{{productDescription}}</a>
+          {{endif ~product_DSP}}
+          {{ifnot ~product_DSP}}
+              {{productDescription}}
+          {{endifnot ~product_DSP}}
         </td>
         <td class="right">
           {{productPrice}}
         </td>
         <td class="center">{{productStatusDsc}}</td>
         <td class="center">
-          <a href="index.php?page=Products-Product&mode=UPD&productId={{productId}}">Editar</a>
+          {{if ~product_UPD}}
+            <a href="index.php?page=Products-Product&mode=UPD&productId={{productId}}">Editar</a>
+          {{endif ~product_UPD}}
           &nbsp;
-          <a href="index.php?page=Products-Product&mode=DEL&productId={{productId}}">Eliminar</a>
+          {{if ~product_DEL}}
+            <a href="index.php?page=Products-Product&mode=DEL&productId={{productId}}">Eliminar</a>
+          {{endif ~product_DEL}}
         </td>
       </tr>
       {{endfor products}}

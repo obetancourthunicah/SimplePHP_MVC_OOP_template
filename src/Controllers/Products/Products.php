@@ -21,6 +21,12 @@ class Products extends PrivateController
   private $productsCount = 0;
   private $pages = 0;
 
+  private $product_DSP = false;
+  private $product_UPD = false;
+  private $product_DEL = false;
+  private $product_INS = false;
+
+
   public function run(): void
   {
     $this->getParamsFromContext();
@@ -69,6 +75,11 @@ class Products extends PrivateController
     $this->itemsPerPage = intval(Context::getContextByKey("products_itemsPerPage"));
     if ($this->pageNumber < 1) $this->pageNumber = 1;
     if ($this->itemsPerPage < 1) $this->itemsPerPage = 10;
+
+    $this->product_DSP = $this->isFeatureAutorized("product_DSP");
+    $this->product_UPD = $this->isFeatureAutorized("product_UPD");
+    $this->product_DEL = $this->isFeatureAutorized("product_DEL");
+    $this->product_INS = $this->isFeatureAutorized("product_INS");
   }
   private function setParamsToContext(): void
   {
@@ -109,5 +120,10 @@ class Products extends PrivateController
       "Products_Products"
     );
     $this->viewData["pagination"] = $pagination;
+
+    $this->viewData["product_DSP"] = $this->product_DSP;
+    $this->viewData["product_UPD"] = $this->product_UPD;
+    $this->viewData["product_DEL"] = $this->product_DEL;
+    $this->viewData["product_INS"] = $this->product_INS;
   }
 }
