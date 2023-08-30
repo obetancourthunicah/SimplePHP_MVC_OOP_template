@@ -10,7 +10,7 @@ class Nav
         if ($tmpNAVIGATION === "") {
             $navigationData = self::getNavFromJson()["public"];
             $saveToSession = intval(Context::getContextByKey("DEVELOPMENT")) !== 1;
-            Context::setContext("PUBLIC_NAVIGATION", $navigationData);
+            Context::setContext("PUBLIC_NAVIGATION", $navigationData, $saveToSession);
         }
     }
     public static function setNavContext()
@@ -20,7 +20,7 @@ class Nav
             $userID = Security::getUserId();
             $navigationData = self::getNavFromJson()["private"];
             foreach ($navigationData as $navEntry) {
-                if (Security::isAuthorized($userID, $navEntry["id"])) {
+                if (Security::isAuthorized($userID, $navEntry["id"], 'MNU')) {
                     $tmpNAVIGATION[] = $navEntry;
                 }
             }
